@@ -1,13 +1,10 @@
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import { Plus } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { ReportCard } from '@/components/reports/ReportCard'
-import { Skeleton } from '@/components/ui/skeleton'
+import { MapClient } from '@/components/map/MapClient'
 import { CATEGORIES } from '@/lib/constants'
 import type { Report } from '@/lib/types'
-
-const ReportMap = dynamic(() => import('@/components/map/ReportMap'), { ssr: false })
 
 async function getReports(): Promise<Report[]> {
   try {
@@ -31,7 +28,7 @@ export default async function HomePage() {
     <div className="flex flex-col md:flex-row h-[calc(100vh-4rem)]">
       {/* Map on top for mobile */}
       <div className="md:hidden h-[300px] relative">
-        <ReportMap reports={reports} height="300px" />
+        <MapClient reports={reports} height="300px" />
       </div>
 
       {/* Left panel: report list */}
@@ -105,8 +102,7 @@ export default async function HomePage() {
 
       {/* Right panel: map (desktop) */}
       <div className="hidden md:block md:flex-1 relative">
-        <ReportMap reports={reports} height="100%" />
-        {/* FAB on desktop */}
+        <MapClient reports={reports} height="100%" />
         <Link
           href="/raport/i-ri"
           className="absolute bottom-6 right-6 z-10 flex items-center gap-2 bg-[#1D9E75] hover:bg-[#17836B] text-white font-semibold px-5 py-3 rounded-full shadow-lg transition-colors"

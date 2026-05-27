@@ -1,9 +1,7 @@
-import dynamic from 'next/dynamic'
 import { createClient } from '@/lib/supabase/server'
-import { CATEGORIES, STATUS_LABELS, MUNICIPALITIES } from '@/lib/constants'
+import { MapClient } from '@/components/map/MapClient'
+import { CATEGORIES } from '@/lib/constants'
 import type { Report } from '@/lib/types'
-
-const ReportMap = dynamic(() => import('@/components/map/ReportMap'), { ssr: false })
 
 async function getAllReports(): Promise<Report[]> {
   try {
@@ -20,7 +18,7 @@ export default async function HartaPage() {
 
   return (
     <div className="relative h-[calc(100vh-4rem)]">
-      <ReportMap reports={reports} height="100%" />
+      <MapClient reports={reports} height="100%" />
 
       {/* Legend overlay */}
       <div className="absolute top-4 left-4 z-10 bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4 max-w-xs">

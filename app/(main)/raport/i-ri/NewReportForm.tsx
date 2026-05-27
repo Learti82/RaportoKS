@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { CATEGORIES, MUNICIPALITIES, CategoryKey } from '@/lib/constants'
 
-const LocationPicker = dynamic(() => import('@/components/map/LocationPicker'), { ssr: false })
+const LocationPicker = dynamic(() => import('@/components/map/LocationPicker'), { ssr: false, loading: () => <div className="h-[350px] bg-gray-100 rounded-lg animate-pulse" /> })
 
 const STEPS = ['Vendndodhja', 'Detajet', 'Rishikimi']
 

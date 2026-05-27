@@ -10,7 +10,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
   if (!isAdmin) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
   const { status, note } = await request.json()
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data: report } = await supabase.from('reports').select('status').eq('id', params.id).single()
   if (!report) return NextResponse.json({ error: 'Raporti nuk u gjet' }, { status: 404 })

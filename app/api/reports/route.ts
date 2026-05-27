@@ -3,7 +3,7 @@ import { auth, currentUser } from '@clerk/nextjs/server'
 import { createClient } from '@/lib/supabase/server'
 
 export async function GET(request: NextRequest) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { searchParams } = new URL(request.url)
 
   const category = searchParams.get('category')
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Mungojnë fushat e detyrueshme' }, { status: 400 })
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase.from('reports').insert({
     reporter_clerk_id: userId,
     reporter_name: user?.firstName && user?.lastName

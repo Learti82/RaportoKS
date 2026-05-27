@@ -4,7 +4,7 @@ import { ReportDetailClient } from './ReportDetailClient'
 
 async function getReport(id: string) {
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
     const { data: report } = await supabase.from('reports').select('*').eq('id', id).single()
     if (!report) return null
 

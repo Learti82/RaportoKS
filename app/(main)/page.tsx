@@ -11,7 +11,7 @@ const ReportMap = dynamic(() => import('@/components/map/ReportMap'), { ssr: fal
 
 async function getReports(): Promise<Report[]> {
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
     const { data } = await supabase
       .from('reports')
       .select('*')

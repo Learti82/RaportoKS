@@ -3,7 +3,7 @@ import { auth } from '@clerk/nextjs/server'
 import { createClient } from '@/lib/supabase/server'
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data: report, error } = await supabase
     .from('reports')
@@ -30,7 +30,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
   if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   const body = await request.json()
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data: report } = await supabase.from('reports').select('*').eq('id', params.id).single()
   if (!report) return NextResponse.json({ error: 'Raporti nuk u gjet' }, { status: 404 })

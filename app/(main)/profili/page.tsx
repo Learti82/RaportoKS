@@ -8,7 +8,7 @@ export default async function ProfilePage() {
   if (!userId) redirect('/sign-in')
 
   const user = await currentUser()
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data: reports } = await supabase
     .from('reports')

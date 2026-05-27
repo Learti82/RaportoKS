@@ -7,7 +7,7 @@ import type { Report } from '@/lib/types'
 
 async function getAllReports(): Promise<Report[]> {
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
     const { data } = await supabase.from('reports').select('*').order('created_at', { ascending: false })
     return data || []
   } catch {

@@ -18,7 +18,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
     ? `${user.firstName} ${user.lastName}`
     : user?.username || 'Anonim'
 
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase.from('report_comments').insert({
     report_id: params.id,
     clerk_user_id: userId,

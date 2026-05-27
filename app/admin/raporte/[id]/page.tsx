@@ -4,7 +4,7 @@ import { AdminReportManager } from './AdminReportManager'
 
 async function getReport(id: string) {
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
     const { data } = await supabase.from('reports').select('*').eq('id', id).single()
     return data
   } catch {

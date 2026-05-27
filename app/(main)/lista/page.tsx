@@ -16,7 +16,7 @@ interface SearchParams {
 
 async function getReports(searchParams: SearchParams): Promise<{ reports: Report[]; total: number }> {
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
     const limit = 12
     const page = parseInt(searchParams.page || '1')
     const offset = (page - 1) * limit

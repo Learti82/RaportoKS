@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
   const ext = file.name.split('.').pop() || 'jpg'
   const path = `${userId}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
 
-  const supabase = createClient()
+  const supabase = await createClient()
   const { error } = await supabase.storage
     .from('report-photos')
     .upload(path, file, { contentType: file.type, upsert: false })
